@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AI_Controller : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject ball;
+    [SerializeField] public GameObject ball;
     [SerializeField] private BoxCollider leftleg;
     [SerializeField] private BoxCollider rightleg;
     [SerializeField] private float force = 300f;
@@ -35,15 +35,18 @@ public class AI_Controller : MonoBehaviour
     {
         if (isMoving)
         {
-            Vector3 ballposi = getballposition();
-
-            animator.SetFloat("Speed", 10f);
-
-            //'Vector3.Distance' function finds the distance between two given transforms.
-            if (Vector3.Distance(destination, ballposi) > 1.0f)
+            if (ball.gameObject)
             {
-                destination = ballposi;
-                myNavMeshAgent.destination = destination;
+                Vector3 ballposi = getballposition();
+
+                animator.SetFloat("Speed", 10f);
+
+                //'Vector3.Distance' function finds the distance between two given transforms.
+                if (Vector3.Distance(destination, ballposi) > 1.0f)
+                {
+                    destination = ballposi;
+                    myNavMeshAgent.destination = destination;
+                }
             }
         }
     }
@@ -70,15 +73,15 @@ public class AI_Controller : MonoBehaviour
             {
                 case 1:
                     rb.AddForce(dir * force * 0.5f);
-                    Debug.Log("Case1");
+                    //Debug.Log("Case1");
                     break;
                 case 2:
                     rb.AddForce(dir * force * 1.5f);
-                    Debug.Log("Case2");
+                    //Debug.Log("Case2");
                     break;
                 default:
                     rb.AddForce(dir * force * 1f);
-                    Debug.Log("Case3");
+                    //Debug.Log("Case3");
                     break;
             }
         }

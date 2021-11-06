@@ -7,14 +7,12 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
 
-    [SerializeField] int Team1Score;
-    [SerializeField] int Team2Score;
- 
+    [SerializeField] public int Team1Score;
+    [SerializeField] public int Team2Score;
+    public GameObject MainBall;
+    //public BoxCollider T1C1, T1C2, T2C1, T2C2;
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
+
 }
