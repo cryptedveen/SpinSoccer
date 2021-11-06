@@ -11,7 +11,7 @@ public class AI_Controller : MonoBehaviour
     [SerializeField] private BoxCollider leftleg;
     [SerializeField] private BoxCollider rightleg;
     [SerializeField] private float force = 300f;
-    [SerializeField] private bool isMoving = false;
+    [SerializeField] public bool isMoving = false;
     
     
     private Rigidbody rb ;

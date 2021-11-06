@@ -11,10 +11,14 @@ public class TapToStart : MonoBehaviour
     [SerializeField] public GameObject AI1;
     [SerializeField] public GameObject AI2;
 
+    private AI_Controller ai1, ai2;
 
     void Start()
     {
         HUD.gameObject.SetActive(false);
+        ai1 = AI1.GetComponent<AI_Controller>();
+        ai2 = AI2.GetComponent<AI_Controller>();
+
     }
 
     // Update is called once per frame
@@ -24,6 +28,9 @@ public class TapToStart : MonoBehaviour
         {
             gameObject.SetActive(false);
             HUD.gameObject.SetActive(true);
+
+            ai1.isMoving = true;
+            ai2.isMoving = true;
 
 
         }
