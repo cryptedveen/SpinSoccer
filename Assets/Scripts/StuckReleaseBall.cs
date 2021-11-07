@@ -12,7 +12,7 @@ public class StuckReleaseBall : MonoBehaviour
     Rigidbody m_Rigidbody;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         currentPosi = transform.position;

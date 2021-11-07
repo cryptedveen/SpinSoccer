@@ -13,7 +13,7 @@ public class TapToStart : MonoBehaviour
 
     private AI_Controller ai1, ai2;
 
-    void Start()
+    void Awake()
     {
         HUD.gameObject.SetActive(false);
         ai1 = AI1.GetComponent<AI_Controller>();

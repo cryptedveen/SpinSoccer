@@ -12,7 +12,7 @@ public class BallCollisionScore : MonoBehaviour
     SpawnBall spawncontrol;
 
 
-    private void Start()
+    private void Awake()
     {
         //Get Gamobjects from scene automatically after spawn.
         post1 = GameObject.Find("Post1");
@@ -30,7 +30,6 @@ public class BallCollisionScore : MonoBehaviour
         T2C2 = post4.GetComponent<BoxCollider>();
         spawncontrol = BallSpawner.GetComponent<SpawnBall>();
         gamescores = ScoreController.GetComponent<GameControl>();
-
 
 
     }
