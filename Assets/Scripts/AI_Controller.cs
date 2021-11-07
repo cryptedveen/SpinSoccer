@@ -8,13 +8,13 @@ public class AI_Controller : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] public GameObject ball;
-    [SerializeField] private BoxCollider leftleg;
-    [SerializeField] private BoxCollider rightleg;
-    [SerializeField] private float force = 300f;
+    //[SerializeField] private BoxCollider leftleg;
+    //[SerializeField] private BoxCollider rightleg;
+    [SerializeField] private float force = 1000f;
     [SerializeField] public bool isMoving = false;
     
     
-    private Rigidbody rb ;
+    public Rigidbody rb ;
     private NavMeshAgent myNavMeshAgent;
     private Vector3 destination;
 
@@ -24,18 +24,18 @@ public class AI_Controller : MonoBehaviour
     {
 
         myNavMeshAgent = GetComponent<NavMeshAgent>();
-
-        rb = ball.GetComponent<Rigidbody>();
-
         destination = myNavMeshAgent.destination;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!rb) rb = ball.GetComponent<Rigidbody>();
+
+
         if (isMoving)
         {
-            if (ball.gameObject)
+            if (ball)
             {
                 Vector3 ballposi = getballposition();
 

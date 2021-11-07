@@ -145,10 +145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 252343193649008076}
   ball: {fileID: 0}
-  leftleg: {fileID: 7670998099602223251}
-  rightleg: {fileID: 5677189548782820059}
-  force: 300
+  force: 1000
   isMoving: 0
+  rb: {fileID: 0}
 --- !u!195 &-1846859040747264319
 NavMeshAgent:
   m_ObjectHideFlags: 0

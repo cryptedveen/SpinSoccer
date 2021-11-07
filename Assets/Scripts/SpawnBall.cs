@@ -22,5 +22,8 @@ public class SpawnBall : MonoBehaviour
 
         ai1.ball = spawnedball;
         ai2.ball = spawnedball;
+
+        ai1.rb = spawnedball.GetComponent<Rigidbody>(); 
+        ai2.rb = spawnedball.GetComponent<Rigidbody>();
     }
 }
