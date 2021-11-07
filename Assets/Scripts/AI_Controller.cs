@@ -10,7 +10,7 @@ public class AI_Controller : MonoBehaviour
     [SerializeField] public GameObject ball;
     //[SerializeField] private BoxCollider leftleg;
     //[SerializeField] private BoxCollider rightleg;
-    [SerializeField] private float force = 1000f;
+    [SerializeField] private float force = 100f;
     [SerializeField] public bool isMoving = false;
     
     
@@ -53,39 +53,65 @@ public class AI_Controller : MonoBehaviour
 
 
     //OnTrigger is for Collider and OnCollisionEnter is for collision. 
-    void OnTriggerEnter(Collider col)
+    /* void OnTriggerEnter(Collider col)
+     {
+         if (col.gameObject == ball)
+         {
+             animator.SetFloat("Speed", 0f);
+
+             //Random Number generation for switch case.
+             int min = 0, max = 4;
+             int randomnumber = Random.Range(min, max);
+
+            //collision point vector from point of contact.
+             Vector3 collisionPoint = col.ClosestPoint(transform.position);
+             Vector3 dir = transform.position - collisionPoint;
+             dir = -dir.normalized;
+
+             //To randomise the force added on collision.
+             switch (randomnumber)
+             {
+                 case 1:
+                     rb.AddForce(dir * force * 0.5f);
+                     //Debug.Log("Case1");
+                     break;
+                 case 2:
+                     rb.AddForce(dir * force * 1.5f);
+                     //Debug.Log("Case2");
+                     break;
+                 default:
+                     rb.AddForce(dir * force * 1f);
+                     //Debug.Log("Case3");
+                     break;
+             }
+         }*/
+
+    void OnCollisionEnter(Collision collision)
     {
-        if (col.gameObject == ball)
+        if (!rb) rb = ball.GetComponent<Rigidbody>();
+        if (collision.gameObject == ball)
         {
-            animator.SetFloat("Speed", 0f);
-            
-            //Random Number generation for switch case.
             int min = 0, max = 4;
             int randomnumber = Random.Range(min, max);
+            Vector3 dir = collision.contacts[0].point - transform.position;
+            dir = dir.normalized;
 
-           //collision point vector from point of contact.
-            Vector3 collisionPoint = col.ClosestPoint(transform.position);
-            Vector3 dir = transform.position - collisionPoint;
-            dir = -dir.normalized;
-
-            //To randomise the force added on collision.
             switch (randomnumber)
             {
                 case 1:
                     rb.AddForce(dir * force * 0.5f);
-                    //Debug.Log("Case1");
                     break;
                 case 2:
                     rb.AddForce(dir * force * 1.5f);
-                    //Debug.Log("Case2");
                     break;
                 default:
                     rb.AddForce(dir * force * 1f);
-                    //Debug.Log("Case3");
                     break;
             }
         }
     }
+
+
 
     //Function to Get Position of ball. 
     Vector3 getballposition()
