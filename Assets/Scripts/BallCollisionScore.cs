@@ -35,9 +35,9 @@ public class BallCollisionScore : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collideractive)
     {
-        collidedbox = collision.gameObject.GetComponent<BoxCollider>();
+        collidedbox = collideractive.gameObject.GetComponent<BoxCollider>();
         if (gameObject)
         {
             if (collidedbox == T1C1 || collidedbox == T1C2)
@@ -59,5 +59,45 @@ public class BallCollisionScore : MonoBehaviour
                 spawncontrol.spawnball();
             }
         }
+
+
+        /* MUST READ 
+          
+         Have Commented the following coz i tried this method but since it calls for the overall collison of game object
+        and not the collider I shifted to OntriggerEnter method where you can get the collider with which the ball is interacting
+        and not TerrainHeightmapSyncControl overall collision If you want to use this below method, GridLayout need to find if
+        the contact point is indexer box collider, which is async bigger process. so use the above method 
+
+        Dont forget to set box collider to trigger when using this method.
+        
+        */
+
+
+
+        /* private void OnCollisionEnter(Collision collision)
+         {
+             collidedbox = collision.gameObject.GetComponent<BoxCollider>();
+             if (gameObject)
+             {
+                 if (collidedbox == T1C1 || collidedbox == T1C2)
+                 {
+                     gamescores.Team1Score = gamescores.Team1Score + 1;
+                     Destroy(gameObject);
+                     Debug.Log(gamescores.Team1Score);
+
+                     spawncontrol.spawnball();
+
+                 }
+
+                 if (collidedbox == T2C1 || collidedbox == T2C2)
+                 {
+                     gamescores.Team2Score = gamescores.Team2Score + 1;
+                     Destroy(gameObject);
+                     Debug.Log(gamescores.Team2Score);
+
+                     spawncontrol.spawnball();
+                 }
+             }
+         }*/
     }
 }
