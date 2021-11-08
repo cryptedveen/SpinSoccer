@@ -45,6 +45,8 @@ public class BallCollisionScore : MonoBehaviour
                 Destroy(gameObject);
                 Debug.Log(gamescores.Team1Score);
 
+                gamescores.scoreUpdate();
+
                 spawncontrol.spawnball();
 
             }
@@ -55,7 +57,11 @@ public class BallCollisionScore : MonoBehaviour
                 Destroy(gameObject);
                 Debug.Log(gamescores.Team2Score);
 
+                gamescores.scoreUpdate();
+
                 spawncontrol.spawnball();
+
+
             }
         }
 
