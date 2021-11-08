@@ -119,9 +119,7 @@ public class AI_Controller : MonoBehaviour
         return ball.transform.position;
     }
 
-    void setMoveTrue (bool mover)
-    {
-        isMoving = mover;
-    }
+    
 
+   
 }

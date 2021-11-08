@@ -8,6 +8,8 @@ using TMPro;
 public class GameControl : MonoBehaviour
 {
 
+    public AudioSource audioSource;
+
     [SerializeField] public int Team1Score;
     [SerializeField] public int Team2Score;
 
@@ -18,6 +20,7 @@ public class GameControl : MonoBehaviour
 
     public void scoreUpdate()
     {
+
         UI1Score.text = Team1Score.ToString();
 
         UI2Score.text = Team2Score.ToString();

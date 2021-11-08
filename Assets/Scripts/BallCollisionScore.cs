@@ -10,6 +10,7 @@ public class BallCollisionScore : MonoBehaviour
     BoxCollider collidedbox;
     GameObject post1, post2, post3, post4, ScoreController, BallSpawner;
     SpawnBall spawncontrol;
+    public GameObject particleprefab, particleprefabinstance;
 
 
     private void Awake()
@@ -34,6 +35,14 @@ public class BallCollisionScore : MonoBehaviour
 
     }
 
+     void destroyparticles()
+        {
+            Destroy(particleprefabinstance);
+            Destroy(gameObject);
+        spawncontrol.spawnball();
+        Debug.Log("Particles Destroy Function Called");
+        }
+
     private void OnTriggerEnter(Collider collideractive)
     {
         collidedbox = collideractive.gameObject.GetComponent<BoxCollider>();
@@ -42,28 +51,39 @@ public class BallCollisionScore : MonoBehaviour
             if (collidedbox == T1C1 || collidedbox == T1C2)
             {
                 gamescores.Team1Score = gamescores.Team1Score + 1;
-                Destroy(gameObject);
+                
                 Debug.Log(gamescores.Team1Score);
 
                 gamescores.scoreUpdate();
 
-                spawncontrol.spawnball();
+                //spawncontrol.spawnball();
 
+                particleprefabinstance = Instantiate(particleprefab, spawncontrol.transform.position, Quaternion.identity);
+
+                Invoke("destroyparticles", 1f);
+
+               // Destroy(gameObject);
             }
 
             if (collidedbox == T2C1 || collidedbox == T2C2)
             {
                 gamescores.Team2Score = gamescores.Team2Score + 1;
-                Destroy(gameObject);
+                
                 Debug.Log(gamescores.Team2Score);
 
                 gamescores.scoreUpdate();
 
-                spawncontrol.spawnball();
+                //spawncontrol.spawnball();
 
+                particleprefabinstance = Instantiate(particleprefab, spawncontrol.transform.position, Quaternion.identity);
 
+                Invoke("destroyparticles", 1f);
+
+                
             }
         }
+
+       
 
 
         /* MUST READ 

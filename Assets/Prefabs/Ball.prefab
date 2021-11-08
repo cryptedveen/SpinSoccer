@@ -148,6 +148,7 @@ MonoBehaviour:
   T2C1: {fileID: 0}
   T2C2: {fileID: 0}
   gamescores: {fileID: 0}
+  particleprefab: {fileID: 6712339293452697859, guid: 1a0cef755ac7fd94e862fb289080a947, type: 3}
 --- !u!114 &1358683510045374121
 MonoBehaviour:
   m_ObjectHideFlags: 0
