@@ -17,7 +17,7 @@ public class RotateOnSlide : MonoBehaviour
 
 
         //The x value of joystick movement controls the rtation of the goal posts. 
-        Quaternion target = Quaternion.Euler(0f, -move * speed, 0f).normalized;
+        Quaternion target = Quaternion.Euler(0f, -move * speed * Time.deltaTime, 0f).normalized;
         transform.rotation = target * transform.rotation ;
 
 

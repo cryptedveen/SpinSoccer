@@ -17,7 +17,7 @@ public class AI_Controller : MonoBehaviour
     public Rigidbody rb ;
     private NavMeshAgent myNavMeshAgent;
     private Vector3 destination;
-
+    public float runspeed = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +45,8 @@ public class AI_Controller : MonoBehaviour
                 if (Vector3.Distance(destination, ballposi) > 1.0f)
                 {
                     destination = ballposi;
+                    
+                    myNavMeshAgent.speed = runspeed * Time.deltaTime;
                     myNavMeshAgent.destination = destination;
                 }
             }
