@@ -8,6 +8,7 @@ public class SpawnBall : MonoBehaviour
     public GameObject spawnedball;
     public AI_Controller ai1;
     public AI_Controller ai2;
+    public GameControl controlgame;
 
     private void Start()
     {
@@ -17,13 +18,17 @@ public class SpawnBall : MonoBehaviour
     //Function to spawn and set the new ball active in the AI_Controllers
     public void spawnball()
     {
-        spawnedball = Instantiate(mainball, gameObject.transform.position, Quaternion.identity);
-        spawnedball.SetActive(true);
+        
+            spawnedball = Instantiate(mainball, gameObject.transform.position, Quaternion.identity);
+            spawnedball.SetActive(true);
 
-        ai1.ball = spawnedball;
-        ai2.ball = spawnedball;
+            ai1.ball = spawnedball;
+            ai2.ball = spawnedball;
 
-        ai1.rb = spawnedball.GetComponent<Rigidbody>(); 
-        ai2.rb = spawnedball.GetComponent<Rigidbody>();
+            ai1.rb = spawnedball.GetComponent<Rigidbody>();
+            ai2.rb = spawnedball.GetComponent<Rigidbody>();
+
+            controlgame.MainBall = spawnedball;
+        
     }
 }

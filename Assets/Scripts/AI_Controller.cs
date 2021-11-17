@@ -28,15 +28,22 @@ public class AI_Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(!rb) rb = ball.GetComponent<Rigidbody>();
 
 
-        if (isMoving)
+        MovetoBall();
+        
+    }
+
+
+    void MovetoBall()
+    {
+        if (isMoving && ball)
         {
-            if (ball)
-            {
+           
+            
                 Vector3 ballposi = getballposition();
 
                 animator.SetFloat("Speed", 10f);
@@ -45,11 +52,11 @@ public class AI_Controller : MonoBehaviour
                 if (Vector3.Distance(destination, ballposi) > 1.0f)
                 {
                     destination = ballposi;
-                    
+
                     myNavMeshAgent.speed = runspeed * Time.deltaTime;
                     myNavMeshAgent.destination = destination;
                 }
-            }
+            
         }
     }
 
@@ -93,6 +100,7 @@ public class AI_Controller : MonoBehaviour
         if (!rb) rb = ball.GetComponent<Rigidbody>();
         if (collision.gameObject == ball)
         {
+            
             int min = 0, max = 4;
             int randomnumber = Random.Range(min, max);
             Vector3 dir = collision.contacts[0].point - transform.position;
@@ -104,7 +112,7 @@ public class AI_Controller : MonoBehaviour
                     rb.AddForce(dir * force * 0.5f);
                     break;
                 case 2:
-                    rb.AddForce(dir * force * 1.5f);
+                    rb.AddForce(dir * force * 0.75f);
                     break;
                 default:
                     rb.AddForce(dir * force * 1f);

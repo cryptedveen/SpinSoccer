@@ -7,6 +7,7 @@ public class TapToStart : MonoBehaviour
 
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject GameControl;
+    [SerializeField] private GameObject numOne,numTwo,numThree;
 
     [SerializeField] public GameObject AI1;
     [SerializeField] public GameObject AI2;

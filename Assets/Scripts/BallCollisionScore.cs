@@ -11,6 +11,7 @@ public class BallCollisionScore : MonoBehaviour
     GameObject post1, post2, post3, post4, ScoreController, BallSpawner;
     SpawnBall spawncontrol;
     public GameObject particleprefab, particleprefabinstance;
+    ParticleSystem particles1, particles2;
 
 
     private void Awake()
@@ -24,6 +25,7 @@ public class BallCollisionScore : MonoBehaviour
         ScoreController = GameObject.Find("__GAME_MANAGER__");
 
 
+
         //Get the relevant components/scripts needed from the game objects after spawn. 
         T1C1 = post1.GetComponent<BoxCollider>();
         T1C2 = post3.GetComponent<BoxCollider>();
@@ -32,16 +34,26 @@ public class BallCollisionScore : MonoBehaviour
         spawncontrol = BallSpawner.GetComponent<SpawnBall>();
         gamescores = ScoreController.GetComponent<GameControl>();
 
+        particleprefabinstance = Instantiate(particleprefab, spawncontrol.transform.position, Quaternion.identity);
 
+      //  particles1 = particleprefabinstance.
+      //  particles2 = particleprefabinstance.GetComponentInChildren<ParticleSystem>();
+
+        particles1 = particleprefabinstance.transform.GetChild(0).GetComponentInChildren<ParticleSystem>();
+        particles2 = particleprefabinstance.transform.GetChild(1).GetComponentInChildren<ParticleSystem>();
     }
 
-     void destroyparticles()
+    void destroyparticles()
         {
-            Destroy(particleprefabinstance);
-            Destroy(gameObject);
-        spawncontrol.spawnball();
-        Debug.Log("Particles Destroy Function Called");
-        }
+        
+        gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        gameObject.transform.position = spawncontrol.transform.position;
+        gameObject.SetActive(true);
+
+        particles1.Stop();
+        particles2.Stop();
+
+    }
 
     private void OnTriggerEnter(Collider collideractive)
     {
@@ -56,13 +68,15 @@ public class BallCollisionScore : MonoBehaviour
 
                 gamescores.scoreUpdate();
 
-                //spawncontrol.spawnball();
+                gameObject.SetActive(false);
 
-                particleprefabinstance = Instantiate(particleprefab, spawncontrol.transform.position, Quaternion.identity);
+                particles1.Play();
+                particles2.Play();
 
-                Invoke("destroyparticles", 1f);
+                Invoke("destroyparticles", 1f); 
+                
 
-               // Destroy(gameObject);
+               
             }
 
             if (collidedbox == T2C1 || collidedbox == T2C2)
@@ -73,13 +87,14 @@ public class BallCollisionScore : MonoBehaviour
 
                 gamescores.scoreUpdate();
 
-                //spawncontrol.spawnball();
+                gameObject.SetActive(false);
 
-                particleprefabinstance = Instantiate(particleprefab, spawncontrol.transform.position, Quaternion.identity);
+                particles1.Play();
+                particles2.Play();
 
-                Invoke("destroyparticles", 1f);
+                Invoke("destroyparticles", 1f); 
 
-                
+
             }
         }
 
