@@ -24,12 +24,12 @@ public class StuckReleaseBall : MonoBehaviour
     {
 
         timer -= Time.deltaTime;
-
-        deltaPosi = currentPosi;
-        currentPosi = transform.position;
+       
 
         if (timer < 0)
         {
+            deltaPosi = currentPosi;
+            currentPosi = transform.position;
             releaseball();
         }
 
@@ -39,14 +39,19 @@ public class StuckReleaseBall : MonoBehaviour
 
     void releaseball()
     {
-        diff = currentPosi - deltaPosi;
+        print("Current Position : "+ currentPosi);
+        print("Delta Position : "+ deltaPosi);
+        diff = deltaPosi - currentPosi;
         //Debug.Log(diff);
+        print("Difference : "+diff);
 
         if (diff.Equals(Vector3.zero))
         {
             //Debug.Log("Ball Force Added");
             m_Rigidbody.AddForce(transform.up * 500);
-            timer = 5f;
+            
         }
+
+        timer = 5f;
     }
 }

@@ -10,6 +10,8 @@ public class SpawnBall : MonoBehaviour
     public AI_Controller ai2;
     public GameControl controlgame;
 
+    Vector3 createPosition;
+
     private void Start()
     {
         spawnball();
@@ -18,8 +20,10 @@ public class SpawnBall : MonoBehaviour
     //Function to spawn and set the new ball active in the AI_Controllers
     public void spawnball()
     {
-        
-            spawnedball = Instantiate(mainball, gameObject.transform.position, Quaternion.identity);
+
+            createPosition = RandomPointInBounds(gameObject.GetComponent<BoxCollider>().bounds);
+
+            spawnedball = Instantiate(mainball, createPosition, Quaternion.identity);
             spawnedball.SetActive(true);
 
             ai1.ball = spawnedball;
@@ -30,5 +34,15 @@ public class SpawnBall : MonoBehaviour
 
             controlgame.MainBall = spawnedball;
         
+    }
+
+
+    public Vector3 RandomPointInBounds(Bounds bounds)
+    {
+        return new Vector3(
+            Random.Range(bounds.min.x, bounds.max.x),
+            Random.Range(bounds.min.y, bounds.max.y),
+            Random.Range(bounds.min.z, bounds.max.z)
+        );
     }
 }

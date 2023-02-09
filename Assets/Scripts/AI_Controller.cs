@@ -52,6 +52,7 @@ public class AI_Controller : MonoBehaviour
                 if (Vector3.Distance(destination, ballposi) > 1.0f)
                 {
                     destination = ballposi;
+                    float runspeed = Random.Range(200, 500);
 
                     myNavMeshAgent.speed = runspeed * Time.deltaTime;
                     myNavMeshAgent.destination = destination;
