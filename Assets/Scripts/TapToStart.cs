@@ -8,7 +8,7 @@ public class TapToStart : MonoBehaviour
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject GameControl;
     [SerializeField] private GameObject numOne,numTwo,numThree;
-
+    [SerializeField] private GameObject UICharacter;
     [SerializeField] public GameObject AI1;
     [SerializeField] public GameObject AI2;
 
@@ -29,6 +29,8 @@ public class TapToStart : MonoBehaviour
         {
             gameObject.SetActive(false);
             HUD.gameObject.SetActive(true);
+
+            UICharacter.gameObject.SetActive(false);
 
             ai1.isMoving = true;
             ai2.isMoving = true;
