@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEditor;
+using UnityEngine.AI;
 
 public class GameControl : MonoBehaviour
 {
 
     public static GameControl instance;
 
-
-   
+    public GameObject UICharacterSpawner, UIChar;
 
     public AudioSource audioSource;
 
@@ -29,14 +29,79 @@ public class GameControl : MonoBehaviour
 
     public GameObject Player, Computer;
 
+    int CharacterNumber = 0;
+
     private void Awake()
     {
 
         instance = this;
 
-        
 
 
+
+    }
+    private void Start()
+    {
+
+        ChangePlayer();
+    }
+
+    public void ChangePlayer()
+    {
+        if(UIChar != null)
+        {
+            Destroy(UIChar);
+        }
+
+        UIChar = Instantiate(aiPrefabs[CharacterNumber], UICharacterSpawner.transform.position, Quaternion.identity);
+        UIChar.transform.parent = UICharacterSpawner.transform;
+        Destroy(UIChar.GetComponent<NavMeshAgent>());
+        Destroy(UIChar.GetComponent<Rigidbody>());
+        Destroy(UIChar.GetComponent<AI_Controller>());
+        Destroy(UIChar.GetComponent<CapsuleCollider>());
+
+
+
+        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[0] = new Material (UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[0]);
+        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[1] = new Material (UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[1]);
+        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[2] = new Material (UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[2]);
+       
+
+
+    }
+
+
+    public void NextCharacter()
+    {
+        if (CharacterNumber < aiPrefabs.Length-1)
+        {
+            CharacterNumber++;
+            ChangePlayer();
+        }
+        else
+        {
+            CharacterNumber = 0;
+            ChangePlayer();
+        }
+            
+    }
+
+    public void PrevCharacter()
+    {
+        if(CharacterNumber > 0)
+        {
+            CharacterNumber--;
+            ChangePlayer();
+        }
+        else
+        {
+           
+
+            CharacterNumber = aiPrefabs.Length - 1;
+
+
+            ChangePlayer();
+        }
 
     }
 
@@ -46,8 +111,8 @@ public class GameControl : MonoBehaviour
 
         aiSpawned = aiPrefabs[aiNumber];
 
-        Player = Instantiate(playerPrefab, Player1Spawner.transform.position, Quaternion.identity);
-        Computer = Instantiate(aiSpawned, Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0));
+        Player = Instantiate(playerPrefab, Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0) );
+        Computer = Instantiate(aiSpawned, Player1Spawner.transform.position, Quaternion.identity);
     }
 
     public void scoreUpdate()
