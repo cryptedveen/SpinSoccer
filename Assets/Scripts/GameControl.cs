@@ -62,9 +62,9 @@ public class GameControl : MonoBehaviour
 
 
 
-        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[0] = new Material (UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[0]);
-        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[1] = new Material (UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[1]);
-        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[2] = new Material (UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[2]);
+        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[0] = UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
+        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[1] = UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[1];
+        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[2] = UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[2];
        
 
 
