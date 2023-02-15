@@ -6,19 +6,14 @@ public class TapToStart : MonoBehaviour
 {
 
     [SerializeField] private GameObject HUD;
-    [SerializeField] private GameObject GameControl;
     [SerializeField] private GameObject numOne,numTwo,numThree;
     [SerializeField] private GameObject UICharacter;
-    [SerializeField] public GameObject AI1;
-    [SerializeField] public GameObject AI2;
 
     private AI_Controller ai1, ai2;
 
     void Awake()
     {
         HUD.gameObject.SetActive(false);
-        ai1 = AI1.GetComponent<AI_Controller>();
-        ai2 = AI2.GetComponent<AI_Controller>();
 
     }
 
@@ -32,9 +27,9 @@ public class TapToStart : MonoBehaviour
 
             UICharacter.gameObject.SetActive(false);
 
-            ai1.isMoving = true;
-            ai2.isMoving = true;
+            GameControl.instance.Player.GetComponent<AI_Controller>().isMoving = true;
 
+            GameControl.instance.Computer.GetComponent<AI_Controller>().isMoving = true;
 
         }
     }

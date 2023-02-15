@@ -13,6 +13,7 @@ public class BallCollisionScore : MonoBehaviour
     public GameObject particleprefab, particleprefabinstance;
     ParticleSystem particles1, particles2;
 
+    Vector3 spawnPosition;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class BallCollisionScore : MonoBehaviour
         BallSpawner = GameObject.Find("BallSpawner");
         ScoreController = GameObject.Find("__GAME_MANAGER__");
 
+
+        
 
 
         //Get the relevant components/scripts needed from the game objects after spawn. 
@@ -48,6 +51,13 @@ public class BallCollisionScore : MonoBehaviour
         
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         gameObject.transform.position = spawncontrol.transform.position;
+
+
+        spawnPosition = spawncontrol.RandomPointInBounds(BallSpawner.GetComponent<BoxCollider>().bounds);
+        
+
+        gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+        gameObject.transform.position = spawnPosition;
         gameObject.SetActive(true);
 
         particles1.Stop();

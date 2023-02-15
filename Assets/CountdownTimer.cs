@@ -16,7 +16,7 @@ public class CountdownTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TotalTime > 0)
+        if (TotalTime > 1)
 
         {
             TotalTime -= Time.deltaTime;

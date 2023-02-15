@@ -8,7 +8,6 @@ public class SpawnBall : MonoBehaviour
     public GameObject spawnedball;
     public AI_Controller ai1;
     public AI_Controller ai2;
-    public GameControl controlgame;
 
     Vector3 createPosition;
 
@@ -21,18 +20,27 @@ public class SpawnBall : MonoBehaviour
     public void spawnball()
     {
 
-            createPosition = RandomPointInBounds(gameObject.GetComponent<BoxCollider>().bounds);
+        createPosition = RandomPointInBounds(gameObject.GetComponent<BoxCollider>().bounds);
 
-            spawnedball = Instantiate(mainball, createPosition, Quaternion.identity);
-            spawnedball.SetActive(true);
+        spawnedball = Instantiate(mainball, createPosition, Quaternion.identity);
+        spawnedball.SetActive(true);
 
-            ai1.ball = spawnedball;
-            ai2.ball = spawnedball;
 
-            ai1.rb = spawnedball.GetComponent<Rigidbody>();
-            ai2.rb = spawnedball.GetComponent<Rigidbody>();
+        GameControl.instance.SpawnPlayers();
 
-            controlgame.MainBall = spawnedball;
+        print(GameControl.instance.playerPrefab.name);
+        print(GameControl.instance.aiSpawned.name);
+
+
+        GameControl.instance.Player.GetComponent<AI_Controller>().ball = spawnedball;
+
+        GameControl.instance.Computer.GetComponent<AI_Controller>().ball = spawnedball;
+
+        GameControl.instance.Player.GetComponent<AI_Controller>().rb = spawnedball.GetComponent<Rigidbody>();
+
+        GameControl.instance.Computer.GetComponent<AI_Controller>().rb = spawnedball.GetComponent<Rigidbody>();
+
+        GameControl.instance.MainBall = spawnedball;
         
     }
 

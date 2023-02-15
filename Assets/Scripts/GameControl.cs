@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEditor;
 
 public class GameControl : MonoBehaviour
 {
+
+    public static GameControl instance;
+
+
+   
 
     public AudioSource audioSource;
 
@@ -15,11 +20,37 @@ public class GameControl : MonoBehaviour
 
     public Text UI1Score, UI2Score;
 
-    public GameObject MainBall;
-    public GameObject Player1, Player2;
-   
+    [HideInInspector] public GameObject MainBall;
 
-public void scoreUpdate()
+    public GameObject Player1Spawner, Player2Spawner;
+
+    public GameObject playerPrefab, aiSpawned;
+    public GameObject[] aiPrefabs;
+
+    public GameObject Player, Computer;
+
+    private void Awake()
+    {
+
+        instance = this;
+
+        
+
+
+
+    }
+
+    public void SpawnPlayers()
+    {
+        int aiNumber = Random.Range(0, aiPrefabs.Length);
+
+        aiSpawned = aiPrefabs[aiNumber];
+
+        Player = Instantiate(playerPrefab, Player1Spawner.transform.position, Quaternion.identity);
+        Computer = Instantiate(aiSpawned, Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0));
+    }
+
+    public void scoreUpdate()
     {
 
         UI1Score.text = Team1Score.ToString();
@@ -34,15 +65,15 @@ public void scoreUpdate()
 
     private void WinScreenShow()
     {
-        Player1.SetActive(false);
-        Player2.SetActive(false);
+        playerPrefab.SetActive(false);
+        aiSpawned.SetActive(false);
         MainBall.SetActive(false);
     }                     
                           
     private void LoseScreenFalse()
-    {                     
-        Player1.SetActive(false);
-        Player2.SetActive(false);
+    {
+        playerPrefab.SetActive(false);
+        aiSpawned.SetActive(false);
         MainBall.SetActive(false);
 
     }

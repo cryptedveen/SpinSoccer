@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 6482997536807981117}
   - component: {fileID: -1846859040747264319}
   m_Layer: 0
-  m_Name: AI_PlayerOne
+  m_Name: 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,10 +166,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 252343193649008076}
   ball: {fileID: 0}
-  force: 1000
+  force: 300
   isMoving: 0
   rb: {fileID: 0}
-  runspeed: 0
+  runspeed: 200
 --- !u!195 &-1846859040747264319
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -755,8 +755,8 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a1a23bf6ab92adf469cac5da57e40051, type: 2}
+  - {fileID: 2100000, guid: 79c54ebb503d33445a7a098e1c431b72, type: 2}
   - {fileID: 2100000, guid: c6d69c60f0cc05b4cad8a4a1cd5e99b6, type: 2}
-  - {fileID: 2100000, guid: f8a0a4094ac10254692b622b32825309, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

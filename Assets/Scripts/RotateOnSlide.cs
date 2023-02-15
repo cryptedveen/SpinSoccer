@@ -11,7 +11,7 @@ public class RotateOnSlide : MonoBehaviour
     bool isInverted = false;
     void Update()
     {
-
+        
 
         float move = joystick.Horizontal;
 
