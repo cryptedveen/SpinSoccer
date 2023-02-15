@@ -6,11 +6,15 @@ public class TapToStart : MonoBehaviour
 {
 
     [SerializeField] private GameObject HUD;
-    [SerializeField] private GameObject numOne,numTwo,numThree;
+    [SerializeField] private GameObject numOne, numTwo, numThree;
     [SerializeField] private GameObject UICharacter;
 
     private AI_Controller ai1, ai2;
 
+
+    bool gameStarted = false;
+
+    [SerializeField] VariableJoystick joystick;
     void Awake()
     {
         HUD.gameObject.SetActive(false);
@@ -20,17 +24,24 @@ public class TapToStart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount >= 1 || Input.GetMouseButtonDown(0))
+
+        if (gameStarted == false)
         {
-            gameObject.SetActive(false);
-            HUD.gameObject.SetActive(true);
+            if (joystick.Horizontal > 0 || joystick.Horizontal < 0)
+            {
+                gameStarted = true;
 
-            UICharacter.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+                HUD.gameObject.SetActive(true);
 
-            GameControl.instance.Player.GetComponent<AI_Controller>().isMoving = true;
+                UICharacter.gameObject.SetActive(false);
 
-            GameControl.instance.Computer.GetComponent<AI_Controller>().isMoving = true;
+                GameControl.instance.Player.GetComponent<AI_Controller>().isMoving = true;
 
+                GameControl.instance.Computer.GetComponent<AI_Controller>().isMoving = true;
+
+            }
         }
+        
     }
 }

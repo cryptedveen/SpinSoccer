@@ -625,6 +625,7 @@ MonoBehaviour:
   numTwo: {fileID: 0}
   numThree: {fileID: 0}
   UICharacter: {fileID: 252343192836443010}
+  joystick: {fileID: 860577088}
 --- !u!1 &493307422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,7 +1421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -1500
       objectReference: {fileID: 0}
     - target: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230, type: 3}
       propertyPath: m_LocalPosition.x
