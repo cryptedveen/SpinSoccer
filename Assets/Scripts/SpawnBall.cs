@@ -11,9 +11,17 @@ public class SpawnBall : MonoBehaviour
 
     Vector3 createPosition;
 
+    TapToStart tos;
+
     private void Start()
     {
+
+        tos = GameObject.Find("StartScreen").GetComponent<TapToStart>();
         spawnball();
+
+       
+
+       
     }
 
     //Function to spawn and set the new ball active in the AI_Controllers
@@ -25,11 +33,16 @@ public class SpawnBall : MonoBehaviour
         spawnedball = Instantiate(mainball, createPosition, Quaternion.identity);
         spawnedball.SetActive(true);
 
+        tos.ballSpawnScript = this;
+        
+        
+    }
+
+
+    public void spawnPlayers()
+    {
 
         GameControl.instance.SpawnPlayers();
-
-        print(GameControl.instance.playerPrefab.name);
-        print(GameControl.instance.aiSpawned.name);
 
 
         GameControl.instance.Player.GetComponent<AI_Controller>().ball = spawnedball;
@@ -41,9 +54,8 @@ public class SpawnBall : MonoBehaviour
         GameControl.instance.Computer.GetComponent<AI_Controller>().rb = spawnedball.GetComponent<Rigidbody>();
 
         GameControl.instance.MainBall = spawnedball;
-        
-    }
 
+    }
 
     public Vector3 RandomPointInBounds(Bounds bounds)
     {

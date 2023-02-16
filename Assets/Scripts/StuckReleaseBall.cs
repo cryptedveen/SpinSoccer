@@ -39,11 +39,10 @@ public class StuckReleaseBall : MonoBehaviour
 
     void releaseball()
     {
-        print("Current Position : "+ currentPosi);
-        print("Delta Position : "+ deltaPosi);
+        
         diff = deltaPosi - currentPosi;
-        //Debug.Log(diff);
-        print("Difference : "+diff);
+        
+      
 
         if (diff.Equals(Vector3.zero))
         {

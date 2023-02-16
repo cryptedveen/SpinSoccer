@@ -36,6 +36,7 @@ public class GameControl : MonoBehaviour
 
         instance = this;
 
+        DontDestroyOnLoad(gameObject);
 
 
 
@@ -60,12 +61,6 @@ public class GameControl : MonoBehaviour
         Destroy(UIChar.GetComponent<AI_Controller>());
         Destroy(UIChar.GetComponent<CapsuleCollider>());
 
-
-
-        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[0] = UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
-        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[1] = UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[1];
-        Player.GetComponentInChildren<SkinnedMeshRenderer>().materials[2] = UIChar.GetComponentInChildren<SkinnedMeshRenderer>().materials[2];
-       
 
 
     }
@@ -111,7 +106,7 @@ public class GameControl : MonoBehaviour
 
         aiSpawned = aiPrefabs[aiNumber];
 
-        Player = Instantiate(playerPrefab, Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0) );
+        Player = Instantiate(aiPrefabs[CharacterNumber], Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0) );
         Computer = Instantiate(aiSpawned, Player1Spawner.transform.position, Quaternion.identity);
     }
 

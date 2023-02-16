@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class TapToStart : MonoBehaviour
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject numOne, numTwo, numThree;
     [SerializeField] private GameObject UICharacter;
+
+    public SpawnBall ballSpawnScript;
 
     private AI_Controller ai1, ai2;
 
@@ -33,6 +36,7 @@ public class TapToStart : MonoBehaviour
             if (joystick.Horizontal > 0 || joystick.Horizontal < 0)
             {
                 gameStarted = true;
+                ballSpawnScript.spawnPlayers();
 
                 gameObject.SetActive(false);
                 HUD.gameObject.SetActive(true);
