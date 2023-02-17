@@ -29,7 +29,9 @@ public class GameControl : MonoBehaviour
 
     public GameObject Player, Computer;
 
-    int CharacterNumber = 0;
+    int CharacterNumber = 1, playerModelCount;
+
+    Transform mainPlayer;
 
     private void Awake()
     {
@@ -37,6 +39,9 @@ public class GameControl : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        playerModelCount = playerPrefab.transform.GetChild(0).childCount;
+
 
 
 
@@ -54,8 +59,9 @@ public class GameControl : MonoBehaviour
             Destroy(UIChar);
         }
 
-        UIChar = Instantiate(aiPrefabs[CharacterNumber], UICharacterSpawner.transform.position, Quaternion.identity);
+        UIChar = Instantiate(playerPrefab, UICharacterSpawner.transform.position, Quaternion.identity);
         UIChar.transform.parent = UICharacterSpawner.transform;
+        UIChar.transform.GetChild(0).GetChild(CharacterNumber).gameObject.SetActive(true);
         Destroy(UIChar.GetComponent<NavMeshAgent>());
         Destroy(UIChar.GetComponent<Rigidbody>());
         Destroy(UIChar.GetComponent<AI_Controller>());
@@ -68,14 +74,14 @@ public class GameControl : MonoBehaviour
 
     public void NextCharacter()
     {
-        if (CharacterNumber < aiPrefabs.Length-1)
+        if (CharacterNumber < playerModelCount - 1)
         {
             CharacterNumber++;
             ChangePlayer();
         }
         else
         {
-            CharacterNumber = 0;
+            CharacterNumber = 1;
             ChangePlayer();
         }
             
@@ -83,16 +89,15 @@ public class GameControl : MonoBehaviour
 
     public void PrevCharacter()
     {
-        if(CharacterNumber > 0)
-        {
+        if(CharacterNumber > 1)
+        {   
             CharacterNumber--;
             ChangePlayer();
         }
         else
         {
-           
 
-            CharacterNumber = aiPrefabs.Length - 1;
+            CharacterNumber = playerModelCount - 1;
 
 
             ChangePlayer();
@@ -106,7 +111,10 @@ public class GameControl : MonoBehaviour
 
         aiSpawned = aiPrefabs[aiNumber];
 
-        Player = Instantiate(aiPrefabs[CharacterNumber], Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0) );
+        Player = Instantiate(playerPrefab, Player2Spawner.transform.position, new Quaternion(0, 1, 0, 0) );
+        
+        Player.transform.GetChild(0).GetChild(CharacterNumber).gameObject.SetActive(true);
+
         Computer = Instantiate(aiSpawned, Player1Spawner.transform.position, Quaternion.identity);
     }
 
