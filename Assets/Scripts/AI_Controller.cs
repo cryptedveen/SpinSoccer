@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class AI_Controller : MonoBehaviour
@@ -32,7 +33,7 @@ public class AI_Controller : MonoBehaviour
     {
         if(!rb) rb = ball.GetComponent<Rigidbody>();
 
-
+        transform.LookAt(ball.transform);
         MovetoBall();
         
     }
@@ -52,7 +53,7 @@ public class AI_Controller : MonoBehaviour
                 if (Vector3.Distance(destination, ballposi) > 1.0f)
                 {
                     destination = ballposi;
-                    float runspeed = Random.Range(200, 500);
+                    float runspeed = Random.Range(200, 300);
 
                     myNavMeshAgent.speed = runspeed * Time.deltaTime;
                     myNavMeshAgent.destination = destination;

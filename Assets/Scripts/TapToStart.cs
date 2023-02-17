@@ -33,19 +33,23 @@ public class TapToStart : MonoBehaviour
 
         if (gameStarted == false)
         {
-            if (joystick.Horizontal > 0 || joystick.Horizontal < 0)
+            if (joystick.Horizontal > 0 || joystick.Horizontal < 0) 
             {
-                gameStarted = true;
-                ballSpawnScript.spawnPlayers();
+                if (GameControl.instance.playerAvailable)     //This checks if character is unlocked
+                {
+                    gameStarted = true;
+                    ballSpawnScript.spawnPlayers();   //Check in Spawn Ball Script
 
-                gameObject.SetActive(false);
-                HUD.gameObject.SetActive(true);
+                    gameObject.SetActive(false);
+                    HUD.gameObject.SetActive(true);
 
-                UICharacter.gameObject.SetActive(false);
+                    UICharacter.gameObject.SetActive(false);
 
-                GameControl.instance.Player.GetComponent<AI_Controller>().isMoving = true;
+                    GameControl.instance.Player.GetComponent<AI_Controller>().isMoving = true;
 
-                GameControl.instance.Computer.GetComponent<AI_Controller>().isMoving = true;
+                    GameControl.instance.Computer.GetComponent<AI_Controller>().isMoving = true;
+                }
+               
 
             }
         }

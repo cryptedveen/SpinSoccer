@@ -42,7 +42,7 @@ public class SpawnBall : MonoBehaviour
     public void spawnPlayers()
     {
 
-        GameControl.instance.SpawnPlayers();
+        GameControl.instance.SpawnPlayers(); 
 
 
         GameControl.instance.Player.GetComponent<AI_Controller>().ball = spawnedball;

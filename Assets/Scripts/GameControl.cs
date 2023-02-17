@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEditor;
 using UnityEngine.AI;
+using System.Linq.Expressions;
 
 public class GameControl : MonoBehaviour
 {
@@ -27,9 +28,11 @@ public class GameControl : MonoBehaviour
     public GameObject playerPrefab, aiSpawned;
     public GameObject[] aiPrefabs;
 
-    public GameObject Player, Computer;
+    public GameObject Player, Computer, lockObject;
 
     int CharacterNumber = 1, playerModelCount;
+
+    public bool playerAvailable;
 
     Transform mainPlayer;
 
@@ -42,7 +45,8 @@ public class GameControl : MonoBehaviour
 
         playerModelCount = playerPrefab.transform.GetChild(0).childCount;
 
-
+        lockObject = GameObject.Find("Lock");
+        lockObject.GetComponent<Image>().enabled = false;
 
 
     }
@@ -59,14 +63,36 @@ public class GameControl : MonoBehaviour
             Destroy(UIChar);
         }
 
+        playerAvailable = true;
+
+        lockObject.GetComponent<Image>().enabled = false;
+
+        
+
         UIChar = Instantiate(playerPrefab, UICharacterSpawner.transform.position, Quaternion.identity);
         UIChar.transform.parent = UICharacterSpawner.transform;
-        UIChar.transform.GetChild(0).GetChild(CharacterNumber).gameObject.SetActive(true);
+
         Destroy(UIChar.GetComponent<NavMeshAgent>());
         Destroy(UIChar.GetComponent<Rigidbody>());
         Destroy(UIChar.GetComponent<AI_Controller>());
         Destroy(UIChar.GetComponent<CapsuleCollider>());
 
+        GameObject currentMesh = UIChar.transform.GetChild(0).GetChild(CharacterNumber).gameObject;
+        currentMesh.SetActive(true);
+
+        GameObject.Find("CharacterName").gameObject.GetComponent<TextMeshProUGUI>().text = currentMesh.GetComponent<isLocked>().charName;
+
+        if (currentMesh.GetComponent<isLocked>().locked == true)
+        {
+            currentMesh.GetComponent<SkinnedMeshRenderer>().material = new Material(Shader.Find("Universal Render Pipeline/Simple Lit"));
+
+            lockObject.GetComponent<Image>().enabled = true;
+
+            playerAvailable = false;
+        }
+
+
+       
 
 
     }
@@ -89,7 +115,7 @@ public class GameControl : MonoBehaviour
 
     public void PrevCharacter()
     {
-        if(CharacterNumber > 1)
+        if(CharacterNumber > 1)   //One because the mesh starts from 1 element as 0 element is armature
         {   
             CharacterNumber--;
             ChangePlayer();
