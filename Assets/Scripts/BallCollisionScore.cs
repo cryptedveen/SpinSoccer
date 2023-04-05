@@ -67,10 +67,10 @@ public class BallCollisionScore : MonoBehaviour
 
     private void OnTriggerEnter(Collider collideractive)
     {
-        collidedbox = collideractive.gameObject.GetComponent<BoxCollider>(); //AI Goals
+        collidedbox = collideractive.gameObject.GetComponent<BoxCollider>(); 
         if (gameObject)
         {
-            if (collidedbox == T1C1 || collidedbox == T1C2)
+            if (collidedbox == T1C1 || collidedbox == T1C2)//AI Goals
             {
                 gamescores.Team1Score = gamescores.Team1Score + 1;
                 
