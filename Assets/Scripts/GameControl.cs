@@ -12,6 +12,10 @@ public class GameControl : MonoBehaviour
 
     public static GameControl instance;
 
+    [HideInInspector]public int PlayerMoney = 200;
+
+    public TextMeshProUGUI MoneyUI;
+
     public GameObject UICharacterSpawner, UIChar;
 
     public AudioSource audioSource;
@@ -39,9 +43,16 @@ public class GameControl : MonoBehaviour
     private void Awake()
     {
 
+
         instance = this;
 
+        f_SaveLoadData();
+
         DontDestroyOnLoad(gameObject);
+
+        f_UpdateMoney();
+
+
 
         playerModelCount = playerPrefab.transform.GetChild(0).childCount;
 
@@ -58,6 +69,8 @@ public class GameControl : MonoBehaviour
 
     public void ChangePlayer()
     {
+
+        
         if(UIChar != null)
         {
             Destroy(UIChar);
@@ -172,4 +185,39 @@ public class GameControl : MonoBehaviour
 
     }
 
+    public void f_SaveLoadData()
+    {
+        print(PlayerPrefs.GetInt("i_Money"));
+
+        if (PlayerPrefs.HasKey("i_Money"))
+        {
+            PlayerPrefs.SetInt("i_Money", PlayerMoney);
+        }
+        else
+        {
+            PlayerMoney = PlayerPrefs.GetInt("i_Money");
+        }
+
+        
+    }
+
+    public void f_SaveMoney()
+    {
+        
+        
+        PlayerPrefs.SetInt("i_Money", PlayerMoney);
+        
+
+        PlayerPrefs.Save();
+    }
+
+    public void f_UpdateMoney()
+    {
+        MoneyUI.SetText(PlayerMoney.ToString());
+    }
+
+    private void OnApplicationQuit()
+    {
+        f_SaveMoney();
+    }
 }

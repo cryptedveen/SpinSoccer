@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f84fe26dd8dac1499a7f6b107eb7735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
+  locked: 1
   charName: The King
 --- !u!1 &8813834175984584787
 GameObject:

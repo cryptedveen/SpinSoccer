@@ -67,7 +67,7 @@ public class BallCollisionScore : MonoBehaviour
 
     private void OnTriggerEnter(Collider collideractive)
     {
-        collidedbox = collideractive.gameObject.GetComponent<BoxCollider>();
+        collidedbox = collideractive.gameObject.GetComponent<BoxCollider>(); //AI Goals
         if (gameObject)
         {
             if (collidedbox == T1C1 || collidedbox == T1C2)
@@ -83,13 +83,14 @@ public class BallCollisionScore : MonoBehaviour
                 particles1.Play();
                 particles2.Play();
 
-                Invoke("destroyparticles", 1f); 
-                
+                Invoke("destroyparticles", 1f);
 
                
+
+
             }
 
-            if (collidedbox == T2C1 || collidedbox == T2C2)
+            if (collidedbox == T2C1 || collidedbox == T2C2) //Player Goals
             {
                 gamescores.Team2Score = gamescores.Team2Score + 1;
                 
@@ -102,9 +103,11 @@ public class BallCollisionScore : MonoBehaviour
                 particles1.Play();
                 particles2.Play();
 
-                Invoke("destroyparticles", 1f); 
+                Invoke("destroyparticles", 1f);
 
-
+                GameControl.instance.PlayerMoney += 50;
+                GameControl.instance.f_UpdateMoney();
+                GameControl.instance.f_SaveMoney();
             }
         }
 
